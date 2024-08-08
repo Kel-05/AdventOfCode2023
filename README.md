@@ -1,2 +1,2 @@
-# AdventOfCode2023
-My AdventOfCode2023 spaghetti code.
+# Advent of Code 2023
+My Advent of Code 2023 spaghetti code.

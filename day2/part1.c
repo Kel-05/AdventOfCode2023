@@ -106,7 +106,8 @@ int main(int argc, char* argv[]) {
     j++;
     sum += checkgame(string, j);
   }
+
   printf("sum: %d\n", sum);
-  
+  fclose(stream_txt);
   return 0;
 }

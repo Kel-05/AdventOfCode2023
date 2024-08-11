@@ -17,13 +17,13 @@ int numdigits(int num) {
   return digits;
 }
 
-// check if value is greater than max 
-int checkmax(int max, int value) {
-  if(value > max) {
-    return 1;
+// check if color is greater than value 
+int greaterthan(int color, int value) {
+  if(color > value) {
+    return color;
   }
   else {
-    return 0;
+    return value;
   }
 }
 
@@ -31,10 +31,11 @@ int checkmax(int max, int value) {
 // it is greater than maximum color-coded value
 int checkgame(char* string, int gameid) {
   char buffer[3];
-  int i = 0, colorlength, value, check;
-  const int rgb[3] = {12, 13, 14}; // maximum values for each color
-
-  for(i += 7 + numdigits(gameid); i < strlen(string); i += colorlength + 2) {
+  int i = 0, wordlength, value;
+  int red = 0, green = 0, blue = 0; /* if set to 0, the initial value will
+					     always be less than the current value */
+  
+  for(i += 7 + numdigits(gameid); i < strlen(string); i += wordlength + 2) {
     buffer[0] = string[i]; // first char will always be a number
 
     // if next char is a number, store it and move by 3
@@ -56,16 +57,16 @@ int checkgame(char* string, int gameid) {
     // if no match then exit with error
     switch(string[i]) {
     case 'r':
-      check = checkmax(rgb[0], value);
-      colorlength = RED;
+      red = greaterthan(red, value);
+      wordlength = RED;
       break;
     case 'g':
-      check = checkmax(rgb[1], value);
-      colorlength = GREEN;
+      green = greaterthan(green, value);
+      wordlength = GREEN;
       break;
     case 'b':
-      check = checkmax(rgb[2], value);
-      colorlength = BLUE;
+      blue = greaterthan(blue, value);
+      wordlength = BLUE;
       break;
     default:
       fprintf(stderr, "Error: unexpected initials found when searching for color\n");
@@ -73,13 +74,8 @@ int checkgame(char* string, int gameid) {
       break;
     }
 
-    // check if previous function returned true.
-    // if so then game is impossible and return 0.
-    if(check) {
-      return 0;
-    }
   }
-  return gameid; // return the ID of the game cause game is possible
+  return (red * green * blue); // return the ID of the game cause game is possible
 }
 
 int main(int argc, char* argv[]) {

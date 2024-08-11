@@ -32,8 +32,7 @@ int greaterthan(int color, int value) {
 int checkgame(char* string, int gameid) {
   char buffer[3];
   int i = 0, wordlength, value;
-  int red = 0, green = 0, blue = 0; /* if set to 0, the initial value will
-					     always be less than the current value */
+  int red = 0, green = 0, blue = 0;
   
   for(i += 7 + numdigits(gameid); i < strlen(string); i += wordlength + 2) {
     buffer[0] = string[i]; // first char will always be a number
